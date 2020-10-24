@@ -7,8 +7,12 @@
     width: 100%;
 }
 
-.post {
+.postsBlock {
+    padding: 10px;
+}
 
+.posts {
+    padding: 10px;
 }
 
 .item {

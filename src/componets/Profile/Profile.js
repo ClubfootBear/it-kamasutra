@@ -2,21 +2,13 @@ import React from 'react';
 import s from './Profile.module.css';
 //Component import
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return (
         <div>
-            <div>
-                <img
-                    className={s.profileImg}
-                    src="https://million-wallpapers.ru/wallpapers/5/15/558809402572735.jpg" alt=""/>
-            </div>
-            <div>
-                ava + description
-            </div>
-            <div>
-                <MyPosts/>
-            </div>
+            <ProfileInfo/>
+            <MyPosts/>
         </div>
     );
 }
