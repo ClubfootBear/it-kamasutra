@@ -12,7 +12,10 @@
   /*grid-gap: 10px;*/
 }
 
-
+.wrapperContent {
+  grid-area: c;
+  background-color: lightslategrey;
+}
 
 
 

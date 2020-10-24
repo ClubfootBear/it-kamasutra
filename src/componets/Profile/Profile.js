@@ -4,17 +4,19 @@ import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = () => {
-    return <div className={s.content}>
+    return (
         <div>
-            <img src="https://million-wallpapers.ru/wallpapers/5/15/558809402572735.jpg" alt=""/>
+            <div>
+                <img src="https://million-wallpapers.ru/wallpapers/5/15/558809402572735.jpg" alt=""/>
+            </div>
+            <div>
+                ava + description
+            </div>
+            <div>
+                <MyPosts/>
+            </div>
         </div>
-        <div>
-            ava + description
-        </div>
-        <div>
-            <MyPosts/>
-        </div>
-    </div>
+    );
 }
 
 export default Profile;

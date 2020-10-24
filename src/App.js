@@ -5,6 +5,7 @@ import React from "react";
 import Header from "./componets/Header/Header";
 import NavBar from "./componets/NavBar/NavBar";
 import Profile from "./componets/Profile/Profile";
+import Dialogs from "./componets/Dialogs/Dialogs";
 
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
     <div className="wrapper">
         <Header/>
         <NavBar/>
-        <Profile/>
+        <div className="wrapperContent">
+            <Dialogs />
+        </div>
+        {/*<Profile/>*/}
     </div>
   );
 }
