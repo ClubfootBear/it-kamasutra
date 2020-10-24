@@ -13,25 +13,7 @@
 }
 
 
-.header{
-  grid-area: h;
-  background-color: darkslateblue;
-}
 
-.header img {
-  width: 65px;
-}
 
-.nav {
-  grid-area: n;
-  background-color: darkslategrey;
-}
 
-.content {
-  grid-area: c;
-  background-color: lightslategrey;
-}
-.content img {
-  height: 250px;
-  width: 100%;
-}
+
