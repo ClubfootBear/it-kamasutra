@@ -6,14 +6,7 @@ import {NavLink} from "react-router-dom";
 const Dialog = (props) => {
     let path = '/dialogs/'
 
-    let dialogs = [
-        {id: 1, name: 'Vasay'},
-        {id: 2, name: 'Petya'},
-        {id: 3, name: 'Dima'},
-        {id: 4, name: 'Sveta'},
-    ]
-
-    let dialogsItems = dialogs.map(d => (
+    let dialogsItems = props.dialogs.map(d => (
         <div className={s.dialog + ' ' + s.active}>
             <NavLink to={`${path}${d.id}`}>{d.name}</NavLink>
         </div>

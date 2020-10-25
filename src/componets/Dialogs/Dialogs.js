@@ -4,16 +4,16 @@ import Message from "./Message/Message";
 import Dialog from "./DialogItem/Dialog";
 
 
-const Dialogs = () => {
+const Dialogs = (props) => {
 
     return (
         <div>
             <div className={s.dialogs}>
                 <div className={s.dialogItems}>
-                    <Dialog/>
+                    <Dialog dialogs={props.dialogsPage.dialogs}/>
                 </div>
                 <div className={s.messages}>
-                    <Message/>
+                    <Message dialogMessages={props.dialogsPage.dialogMessages}/>
                 </div>
             </div>
         </div>

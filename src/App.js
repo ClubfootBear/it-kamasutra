@@ -11,15 +11,17 @@ import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 
 
-function App() {
+function App(props) {
     return (
         <BrowserRouter>
             <div className="wrapper">
                 <Header/>
                 <NavBar/>
                 <div className="wrapperContent">
-                    <Route exact path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/profile'} component={Profile}/>
+                    <Route exact path={'/dialogs'} render={() =>
+                        <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path={'/profile'} render={() =>
+                        <Profile profilePage={props.state.profilePage}/>}/>
                 </div>
             </div>
         </BrowserRouter>

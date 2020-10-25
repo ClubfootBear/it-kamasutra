@@ -3,15 +3,10 @@ import s from './MyPosts.module.css';
 //Component import
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-    let messages = [
-        {id: 1, message: 'Hi', likesCount: 15,},
-        {id: 2, message: 'Da', likesCount: 35,},
-        {id: 3, message: 'Vot tak vot', likesCount: 5,},
+const MyPosts = (props) => {
 
-    ]
 
-    let messageItems = messages.map( m => <Post message={m.message} likesCount={m.likesCount}/>)
+    let messageItems = props.posts.map( p => <Post post={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -20,7 +15,7 @@ const MyPosts = () => {
             </h3>
             <div>
                 <div>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="" id="" cols="15" rows="5"></textarea>
                 </div>
                 <div>
                     <button>Add new Post</button>
