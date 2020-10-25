@@ -9,9 +9,12 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addNewPost = () => {
-        debugger;
+        props.addPost()
+    }
+
+    let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.addPost(text)
+        props.updateNewPostText(text);
     }
 
     return (
@@ -21,7 +24,7 @@ const MyPosts = (props) => {
             </h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={ addNewPost }>Add new Post</button>
