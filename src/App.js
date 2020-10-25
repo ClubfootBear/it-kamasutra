@@ -21,7 +21,10 @@ function App(props) {
                     <Route exact path={'/dialogs'} render={() =>
                         <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                     <Route path={'/profile'} render={() =>
-                        <Profile profilePage={props.state.profilePage}/>}/>
+                        <Profile
+                            profilePage={props.state.profilePage}
+                            addPost={props.addPost}
+                        />}/>
                 </div>
             </div>
         </BrowserRouter>

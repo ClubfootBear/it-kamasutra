@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../renderEntireTree";
+
 let state = {
     dialogsPage: {
         dialogs: [
@@ -18,7 +20,21 @@ let state = {
             {id: 2, message: 'Da', likesCount: 35,},
             {id: 3, message: 'Vot tak vot', likesCount: 5,},
         ]
-    }
+    },
+    sideBar: {}
 }
+
+export let addPost = (sendedMessage) => {
+    debugger;
+
+    let newPost = {
+        id: 5,
+        message: sendedMessage,
+        likesCount: 0,
+    }
+    state.profilePage.posts.push(newPost)
+    renderEntireTree(state)
+}
+
 
 export default state;
