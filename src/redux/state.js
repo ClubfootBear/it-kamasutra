@@ -1,3 +1,9 @@
+import {act} from "@testing-library/react";
+
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+const ADD_POST = 'ADD-POST';
+
+
 let store = {
     _state: {
         dialogsPage: {
@@ -28,31 +34,40 @@ let store = {
         return this._state
     },
 
-    renderEntireTree() {
+    _callSubscriber() {
         console.log('Privet')
     },
 
-    addPost() {
-
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        }
-        store._state.profilePage.posts.push(newPost)
-        store._state.profilePage.newPostText = '';
-        this.renderEntireTree(this._state)
-    },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this.renderEntireTree(this._state)
-    },
-
     subscribe(observer) {
-        this.renderEntireTree = observer;
-    }
+        this._callSubscriber = observer;
+    },
 
+    dispatch (action) {
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            }
+            store._state.profilePage.posts.push(newPost)
+            store._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_POST) {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state)
+        }
+    },
+}
+
+export const updateNewPostCreator = (text) => {
+    return {
+        type: UPDATE_NEW_POST,
+        newText: text,
+    }
+}
+
+export const addNewPostCreator = () => {
+    return {type: ADD_POST}
 }
 
 export default store;
