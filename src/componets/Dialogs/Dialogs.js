@@ -7,8 +7,6 @@ import {addNewMessageCreator, updateMessageBodyCreator} from "../../redux/dialog
 
 const Dialogs = (props) => {
 
-    let newItemMessage = React.createRef();
-
     let addNewMessage = () => {
         props.dispatch(addNewMessageCreator());
     }
@@ -28,7 +26,7 @@ const Dialogs = (props) => {
                 <div className={s.messages}>
                     <Message dialogMessages={props.dialogsPage.dialogMessages}/>
                     <div>
-                        <textarea ref={newItemMessage} onChange={onMessageBodyChange} value={props.dialogsPage.newMessageBody}></textarea>
+                        <textarea onChange={onMessageBodyChange} value={props.dialogsPage.newMessageBody}></textarea>
                     </div>
                     <div>
                         <button onClick={addNewMessage}>Send Message</button>

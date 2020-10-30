@@ -20,12 +20,12 @@ function App(props) {
                 <div className="wrapperContent">
                     <Route exact path={'/dialogs'} render={() =>
                         <Dialogs
-                            dialogsPage={props.state.dialogsPage}
+                            dialogsPage={props.store.dialogsPage}
                             dispatch={props.dispatch}
                         />}/>
                     <Route path={'/profile'} render={() =>
                         <Profile
-                            profilePage={props.state.profilePage}
+                            store={props.store}
                             dispatch={props.dispatch}
                         />}/>
                 </div>

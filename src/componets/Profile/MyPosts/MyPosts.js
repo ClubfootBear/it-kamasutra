@@ -7,14 +7,13 @@ import {addNewPostCreator, updateNewPostCreator} from "../../../redux/profile_re
 const MyPosts = (props) => {
     let messageItems = props.posts.map( p => <Post post={p.message} likesCount={p.likesCount}/>)
 
-    let newPostElement = React.createRef();
-
-    let addNewPost = () => {
+    let onAddNewPost = () => {
         props.dispatch(addNewPostCreator())
     }
 
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
+    let onPostChange = (e) => {
+        let text = e.target.value;
+        // debugger
         // let action = updateNewPostCreator(text);
         props.dispatch(updateNewPostCreator(text));
     }
@@ -26,10 +25,10 @@ const MyPosts = (props) => {
             </h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}></textarea>
+                    <textarea onChange={onPostChange} value={props.newPostText}></textarea>
                 </div>
                 <div>
-                    <button onClick={ addNewPost }>Add new Post</button>
+                    <button onClick={ onAddNewPost }>Add new Post</button>
                 </div>
                 <div className={s.posts}>
                     {messageItems}
