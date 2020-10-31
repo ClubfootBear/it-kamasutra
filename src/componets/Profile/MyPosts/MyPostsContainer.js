@@ -1,27 +1,30 @@
-// import React from 'react';
-// //Component import
-// import {addNewPostCreator, updateNewPostCreator} from "../../../redux/profile_reducer";
-// import MyPosts from "./MyPosts";
-// import store from "../../../redux/redux_store";
-//
-// const MyPostsContainer = (props) => {
-    // let state = props.store.getState();
-    // let posts={props.store.getState().profilePage.posts}
-    // let newPostText={props.store.profilePage.newPostText}
-    // let dispatch={props.store.dispatch}
+import React from 'react';
+//Component import
+import {addNewPostCreator, updateNewPostCreator} from "../../../redux/profile_reducer";
+import MyPosts from "./MyPosts";
 
-//     let addNewPost = () => {
-//         props.dispatch(addNewPostCreator())
-//     }
-//
-//     let onPostChange = (text) => {
-//         // let action = updateNewPostCreator(text);
-//         props.dispatch(updateNewPostCreator(text));
-//     }
-//
-//     return (
-//         // <MyPosts posts={posts} />
-//     );
-// }
+const MyPostsContainer = (props) => {
+    let state = props.store.getState();
+    let posts = state.profilePage.posts;
+    let newPostText = state.profilePage.newPostText;
 
-// export default MyPostsContainer;
+
+    let addNewPost = () => {
+        props.store.dispatch(addNewPostCreator())
+    }
+
+    let onPostChange = (text) => {
+        props.store.dispatch(updateNewPostCreator(text));
+    }
+
+    return (
+        <MyPosts
+            posts={posts}
+            newPostText={newPostText}
+            addNewPost={addNewPost}
+            onPostChange={onPostChange}
+        />
+    );
+}
+
+export default MyPostsContainer;

@@ -9,6 +9,7 @@ import Profile from "./componets/Profile/Profile";
 import Dialogs from "./componets/Dialogs/Dialogs";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
+import DialogsContainer from "./componets/Dialogs/DialogsContainer";
 
 
 function App(props) {
@@ -19,14 +20,17 @@ function App(props) {
                 <NavBar/>
                 <div className="wrapperContent">
                     <Route exact path={'/dialogs'} render={() =>
-                        <Dialogs
-                            dialogsPage={props.store.dialogsPage}
-                            dispatch={props.dispatch}
-                        />}/>
+                        // <Dialogs
+                        //     dialogsPage={props.state.dialogsPage}
+                        //     dispatch={props.dispatch}
+                        // />
+                        <DialogsContainer
+                            store={props.store}
+                        />
+                    }/>
                     <Route path={'/profile'} render={() =>
                         <Profile
                             store={props.store}
-                            dispatch={props.dispatch}
                         />}/>
                 </div>
             </div>
