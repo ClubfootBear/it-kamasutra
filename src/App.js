@@ -6,7 +6,6 @@ import React from "react";
 import Header from "./componets/Header/Header";
 import NavBar from "./componets/NavBar/NavBar";
 import Profile from "./componets/Profile/Profile";
-import Dialogs from "./componets/Dialogs/Dialogs";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 import DialogsContainer from "./componets/Dialogs/DialogsContainer";
