@@ -20,18 +20,11 @@ function App(props) {
                 <NavBar/>
                 <div className="wrapperContent">
                     <Route exact path={'/dialogs'} render={() =>
-                        // <Dialogs
-                        //     dialogsPage={props.state.dialogsPage}
-                        //     dispatch={props.dispatch}
-                        // />
-                        <DialogsContainer
-                            store={props.store}
-                        />
+                        <DialogsContainer />
                     }/>
                     <Route path={'/profile'} render={() =>
-                        <Profile
-                            store={props.store}
-                        />}/>
+                        <Profile />
+                    }/>
                 </div>
             </div>
         </BrowserRouter>
