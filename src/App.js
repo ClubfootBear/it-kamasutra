@@ -9,6 +9,7 @@ import Profile from "./componets/Profile/Profile";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 import DialogsContainer from "./componets/Dialogs/DialogsContainer";
+import UsersContainer from "./componets/Users/UsersContainer";
 
 
 function App(props) {
@@ -23,6 +24,9 @@ function App(props) {
                     }/>
                     <Route path={'/profile'} render={() =>
                         <Profile />
+                    }/>
+                    <Route path={'/users'} render={() =>
+                        <UsersContainer />
                     }/>
                 </div>
             </div>
