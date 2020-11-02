@@ -1,45 +1,28 @@
 import React from 'react';
-import s from './Users.module.css'
+import s from './Users.module.css';
+import * as axios from 'axios';
+import userPhoto from '../../assets/img/not_found.png';
 
 const Users = (props) => {
+    //ApIKey c27281a1-c877-4294-ae13-c3271b2f6a40
 
-    if (props.users.length === 0) {
-        props.setUsers([
-                {
-                    id: 1,
-                    followed: true,
-                    url: 'https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/19/EP1063-CUSA15547_00-AV00000000000022/image?w=960&h=960&bg_color=000000&opacity=100&_version=00_09_000',
-                    name: 'Vasay',
-                    status: 'We are Champions!',
-                    locations: {city: 'Tmn', country: 'RU'},
-                },
-                {
-                    id: 2,
-                    followed: true,
-                    url: 'https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/19/EP1063-CUSA15547_00-AV00000000000022/image?w=960&h=960&bg_color=000000&opacity=100&_version=00_09_000',
-                    name: 'Misha',
-                    status: 'We are Champions!',
-                    locations: {city: 'Tmn', country: 'RU'},
-                },
-                {
-                    id: 3,
-                    followed: false,
-                    url: 'https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/19/EP1063-CUSA15547_00-AV00000000000022/image?w=960&h=960&bg_color=000000&opacity=100&_version=00_09_000',
-                    name: 'Katya',
-                    status: 'We are Champions!',
-                    locations: {city: 'Ekb', country: 'RU'},
-                },
-            ]
-        )
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then( response => {
+                // debugger;
+                props.setUsers(response.data.items)
+            });
+        }
     }
 
     return (
         <div>
+            <button onClick={getUsers}>GetUsers</button>
             {
                 props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.url} className={s.imgsize}/>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto } className={s.imgsize}/>
                         </div>
                         <div>
                             {u.followed ?
@@ -56,8 +39,8 @@ const Users = (props) => {
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.locations.city}</div>
-                        <div>{u.locations.country}</div>
+                        <div>{"u.locations.city"}</div>
+                        <div>{"u.locations.country"}</div>
                     </span>
                 </div>)
             }
