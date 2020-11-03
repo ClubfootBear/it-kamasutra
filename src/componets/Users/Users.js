@@ -8,31 +8,40 @@ import * as axios from 'axios';
 import userPhoto from '../../assets/img/not_found.png';
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props);
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then( response => {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageToShow}`).then( response => {
+            // debugger;
+            this.props.setUsers(response.data.items);
+            this.props.setUsersTotalCount(response.data.totalCount);
+        });
+    }
+
+    onChangePage = (pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageToShow}`).then( response => {
             // debugger;
             this.props.setUsers(response.data.items)
         });
-
     }
 
-    // getUsers = () => {
-    //     if (this.props.users.length === 0) {
-    //         axios.get('https://social-network.samuraijs.com/api/1.0/users').then( response => {
-    //             // debugger;
-    //             this.props.setUsers(response.data.items)
-    //         });
-    //     }
-    // }
-
-
-
     render() {
+        let pagesCount = Math.ceil(this.props.usersCount / this.props.pageToShow);
+
+        let pages =[]
+        for (let i=1; i <= pagesCount; i++){
+            pages.push(i);
+        }
+
         return (
             <div>
-                <button onClick={this.getUsers}>GetUsers</button>
+                {pages.map( p => {
+                    return <span
+                        className={this.props.currentPage === p && s.selectedItem}
+                        onClick={(e) => {this.onChangePage(p)}}
+                    >{p}</span>
+                })}
+
                 {
                     this.props.users.map(u => <div key={u.id}>
                     <span>
@@ -59,6 +68,7 @@ class Users extends React.Component {
                     </span>
                     </div>)
                 }
+                <button onClick={this.getUsers}>GetUsers</button>
             </div>
         )
 
