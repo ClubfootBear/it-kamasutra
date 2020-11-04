@@ -23,7 +23,7 @@ function App(props) {
                     <Route exact path={'/dialogs'} render={() =>
                         <DialogsContainer />
                     }/>
-                    <Route path={'/profile'} render={() =>
+                    <Route path={'/profile/:userId?'} render={() =>
                         // <Profile />
                         <ProfileContainer />
                     }/>
