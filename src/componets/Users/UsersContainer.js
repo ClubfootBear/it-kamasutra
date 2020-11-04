@@ -2,39 +2,57 @@
 //https://social-network.samuraijs.com/
 
 import React from 'react';
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "../../redux/users_reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setIsFetchingAC,
+    setUsersAC,
+    setUsersTotalCountAC,
+    unfollowAC
+} from "../../redux/users_reducer";
 import {connect} from "react-redux";
 import * as axios from 'axios';
 import Users from "./Users";
+import preLoader from '../../assets/img/BeanEater.svg';
+import Preloader from "../Preloader/Preloader";
 
 class UsersApiComponent extends React.Component {
 
     componentDidMount() {
+        this.props.setFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageToShow}`).then( response => {
             // debugger;
             this.props.setUsers(response.data.items);
             this.props.setUsersTotalCount(response.data.totalCount);
+            this.props.setFetching(false)
         });
     }
 
     onChangePage = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
+        this.props.setFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageToShow}`).then( response => {
             // debugger;
             this.props.setUsers(response.data.items)
+            this.props.setFetching(false)
         });
     }
 
     render() {
-        return <Users
-            usersCount={this.props.usersCount}
-            pageToShow={this.props.pageToShow}
-            currentPage={this.props.currentPage}
-            onChangePage={this.onChangePage}
-            users={this.props.users}
-            unFollow={this.props.unFollow}
-            follow={this.props.follow}
-        />
+        return <> { this.props.isFetching ?
+            <Preloader />
+            : null}
+            <Users
+                usersCount={this.props.usersCount}
+                pageToShow={this.props.pageToShow}
+                currentPage={this.props.currentPage}
+                onChangePage={this.onChangePage}
+                users={this.props.users}
+                unFollow={this.props.unFollow}
+                follow={this.props.follow}
+                setFetching={this.props.setFetching}
+            />
+        </>
     }
 }
 
@@ -48,6 +66,7 @@ let mapStateToProps = (state) =>
         usersCount: state.usersPage.usersCount,
         pageToShow: state.usersPage.pageToShow,
         currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
     }
 }
 
@@ -68,7 +87,11 @@ let mapDispatchToProps = (dispatch) =>
         },
         setUsersTotalCount: (totalUsers) => {
             dispatch(setUsersTotalCountAC(totalUsers))
+        },
+        setFetching: (isFetching) => {
+            dispatch(setIsFetchingAC(isFetching))
         }
+
     }
 }
 
