@@ -11,13 +11,15 @@ import Route from "react-router-dom/es/Route";
 import DialogsContainer from "./componets/Dialogs/DialogsContainer";
 import UsersContainer from "./componets/Users/UsersContainer";
 import ProfileContainer from "./componets/Profile/ProfileContainer";
+import HeaderContainer from "./componets/Header/HeaderContainer";
 
 
 function App(props) {
     return (
         <BrowserRouter>
             <div className="wrapper">
-                <Header/>
+                {/*<Header/>*/}
+                <HeaderContainer />
                 <NavBar/>
                 <div className="wrapperContent">
                     <Route exact path={'/dialogs'} render={() =>
