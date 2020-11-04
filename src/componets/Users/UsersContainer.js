@@ -3,17 +3,16 @@
 
 import React from 'react';
 import {
-    followAC,
-    setCurrentPageAC,
-    setIsFetchingAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setFetching,
+    setUsers,
+    setUsersTotalCount,
+    unFollow
 } from "../../redux/users_reducer";
 import {connect} from "react-redux";
 import * as axios from 'axios';
 import Users from "./Users";
-import preLoader from '../../assets/img/BeanEater.svg';
 import Preloader from "../Preloader/Preloader";
 
 class UsersApiComponent extends React.Component {
@@ -70,31 +69,40 @@ let mapStateToProps = (state) =>
     }
 }
 
-let mapDispatchToProps = (dispatch) =>
-{
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId))
-        },
-        unFollow: (userId) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setUsersTotalCount: (totalUsers) => {
-            dispatch(setUsersTotalCountAC(totalUsers))
-        },
-        setFetching: (isFetching) => {
-            dispatch(setIsFetchingAC(isFetching))
-        }
+// let mapDispatchToProps = (dispatch) =>
+// {
+//     return {
+//         follow: (userId) => {
+//             dispatch(followAC(userId))
+//         },
+//         unFollow: (userId) => {
+//             dispatch(unfollowAC(userId))
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (pageNumber) => {
+//             dispatch(setCurrentPageAC(pageNumber))
+//         },
+//         setUsersTotalCount: (totalUsers) => {
+//             dispatch(setUsersTotalCountAC(totalUsers))
+//         },
+//         setFetching: (isFetching) => {
+//             dispatch(setIsFetchingAC(isFetching))
+//         }
+//
+//     }
+// }
 
+const UsersContainer = connect(mapStateToProps,
+    {
+        follow,
+        unFollow,
+        setUsers,
+        setCurrentPage,
+        setUsersTotalCount,
+        setFetching,
     }
-}
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent);
+    )(UsersApiComponent);
 
 export default UsersContainer;
