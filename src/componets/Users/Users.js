@@ -6,6 +6,7 @@ import s from './Users.module.css';
 import userPhoto from '../../assets/img/not_found.png';
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
+import {letFollow, letUnFollow} from "../Api/api";
 
 let Users = (props) => {
 
@@ -35,31 +36,21 @@ let Users = (props) => {
                         </div>
                         <div>
                             {u.followed ?
-                                <button onClick={() => {
-
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "c27281a1-c877-4294-ae13-c3271b2f6a40"
-                                        }
-                                    }).then( response => {
-                                        // debugger;
-                                        if (response.data.resultCode === 0) {props.unFollow(u.id)}
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    // debugger
+                                    props.setFetchingInProgress(true, u.id)
+                                    letUnFollow(u.id).then( data => {
+                                        if (data.resultCode === 0) {props.unFollow(u.id)}
+                                        props.setFetchingInProgress(false, u.id)
                                     });
 
                                 }}> Unfollow </button> :
-                                <button onClick={() => {
-
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "c27281a1-c877-4294-ae13-c3271b2f6a40"
-                                        }
-                                    }).then( response => {
-                                        // debugger;
-                                        if (response.data.resultCode === 0) {props.follow(u.id)}
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.setFetchingInProgress(true, u.id)
+                                    letFollow(u.id).then( data => {
+                                        if (data.resultCode === 0) {props.follow(u.id)}
+                                        props.setFetchingInProgress(false, u.id)
                                     });
-
                                 }}> Follow </button>}
                         </div>
                     </span>
