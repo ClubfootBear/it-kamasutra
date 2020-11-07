@@ -5,8 +5,7 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/img/not_found.png';
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {letFollow, letUnFollow} from "../Api/api";
+
 
 let Users = (props) => {
 
@@ -38,19 +37,10 @@ let Users = (props) => {
                             {u.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     // debugger
-                                    props.setFetchingInProgress(true, u.id)
-                                    letUnFollow(u.id).then( data => {
-                                        if (data.resultCode === 0) {props.unFollow(u.id)}
-                                        props.setFetchingInProgress(false, u.id)
-                                    });
-
+                                    props.unFollow(u.id);
                                 }}> Unfollow </button> :
                                 <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.setFetchingInProgress(true, u.id)
-                                    letFollow(u.id).then( data => {
-                                        if (data.resultCode === 0) {props.follow(u.id)}
-                                        props.setFetchingInProgress(false, u.id)
-                                    });
+                                     props.follow(u.id);
                                 }}> Follow </button>}
                         </div>
                     </span>

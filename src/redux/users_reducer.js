@@ -1,3 +1,5 @@
+import {usersApi} from "../componets/Api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -56,34 +58,49 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const follow = (userId) => ({
-    type: FOLLOW, userId
-})
+export const followSuccess = (userId) => ({type: FOLLOW, userId})
+export const unFollowSuccess = (userId) => ({type: UNFOLLOW, userId})
+export const setUsers = (users) => ({type: SET_USERS, users})
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export const setUsersTotalCount = (totalUsers) => ({type: SET_USERS_TOTAL_COUNT, totalUsers})
+export const setFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const setFetchingInProgress = (isFetching, userId) => ({type: FETCHING_IN_PROGRESS,isFetching,userId})
 
-export const unFollow = (userId) => ({
-    type: UNFOLLOW, userId
-})
 
-export const setUsers = (users) => ({
-    type: SET_USERS, users
-})
+export const getUsers = (currentPage, pageToShow) => {
+    return (dispatch) => {
+        dispatch(setFetching(true))
+        usersApi.getUsers(currentPage, pageToShow).then(data => {
+            dispatch(setUsers(data.items));
+            dispatch(setUsersTotalCount(data.totalCount));
+            dispatch(setFetching(false))
+        });
+    }
+}
 
-export const setCurrentPage = (currentPage) => ({
-    type: SET_CURRENT_PAGE, currentPage
-})
 
-export const setUsersTotalCount = (totalUsers) => ({
-    type: SET_USERS_TOTAL_COUNT, totalUsers
-})
+export const unFollow = (userId) => {
+    return (dispatch) => {
+        dispatch(setFetchingInProgress(true, userId))
+        usersApi.letUnFollow(userId).then( data => {
+            if (data.resultCode === 0) {dispatch(unFollowSuccess(userId))}
+            dispatch(setFetchingInProgress(false, userId))
+        });
+    }
+}
 
-export const setFetching = (isFetching) => ({
-    type: TOGGLE_IS_FETCHING, isFetching
-})
 
-export const setFetchingInProgress = (isFetching, userId) => ({
-    type: FETCHING_IN_PROGRESS,
-    isFetching,
-    userId
-})
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(setFetchingInProgress(true, userId))
+        usersApi.letFollow(userId).then( data => {
+            if (data.resultCode === 0) {dispatch(followSuccess(userId))}
+            dispatch(setFetchingInProgress(false, userId))
+        });
+    }
+}
+
+
+
 
 export default usersReducer;

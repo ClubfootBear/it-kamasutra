@@ -14,18 +14,19 @@ export const usersApi = {
         return  instance.get(`users?page=${currentPage}&count=${pageToShow}`).then( response => {
             return response.data;
         });
+    },
+
+    letFollow(id){
+        return instance.post(`follow/${id}`).then( response => {
+            return response.data;
+        });
+    },
+
+    letUnFollow(id) {
+        return instance.delete(`follow/${id}`).then( response => {
+            return response.data;
+        });
     }
+
 }
 
-
-export const letFollow = (id) => {
-    return instance.post(`follow/${id}`).then( response => {
-        return response.data;
-    });
-}
-
-export const letUnFollow = (id) => {
-    return instance.delete(`follow/${id}`).then( response => {
-        return response.data;
-    });
-}
