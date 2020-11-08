@@ -10,6 +10,8 @@ import {
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
+import {compose} from "redux";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 class UsersApiComponent extends React.Component {
 
@@ -55,15 +57,26 @@ let mapStateToProps = (state) =>
     }
 }
 
+export default compose(
+    connect(mapStateToProps,
+        {
+            setUsers,
+            getUsers,
+            unFollow,
+            follow,
+            setCurrentPage,
+        }),
+    WithAuthRedirect)(UsersApiComponent);
 
-const UsersContainer = connect(mapStateToProps,
-    {
-        setUsers,
-        getUsers,
-        unFollow,
-        follow,
-        setCurrentPage,
-    }
-    )(UsersApiComponent);
+// let AuthRedirectComponent = WithAuthRedirect(Dialogs);
 
-export default UsersContainer;
+// const UsersContainer = connect(mapStateToProps,
+//     {
+//         setUsers,
+//         getUsers,
+//         unFollow,
+//         follow,
+//         setCurrentPage,
+//     })(UsersApiComponent);
+//
+// export default UsersContainer;
