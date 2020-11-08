@@ -1,5 +1,4 @@
 import {usersApi} from "../componets/Api/api";
-import {setAuthData} from "./auth_reducer";
 
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const ADD_POST = 'ADD-POST';
@@ -61,8 +60,6 @@ export const getUserId = (userId) => {
         });
     }
 }
-
-
 
 
 export default profileReducer;

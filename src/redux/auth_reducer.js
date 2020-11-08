@@ -1,5 +1,4 @@
 import {usersApi} from "../componets/Api/api";
-import {followSuccess, setFetchingInProgress} from "./users_reducer";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 
