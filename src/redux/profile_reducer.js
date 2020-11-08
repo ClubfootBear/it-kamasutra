@@ -1,3 +1,6 @@
+import {usersApi} from "../componets/Api/api";
+import {setAuthData} from "./auth_reducer";
+
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -50,5 +53,16 @@ export const addNewPostCreator = () => ({
 export const setUserProfile = (userData) => ({
     type: SET_USER_PROFILE, userData
 })
+
+export const getUserId = (userId) => {
+    return (dispatch) => {
+        usersApi.userProfile(userId).then( data => {
+            dispatch(setUserProfile(data))
+        });
+    }
+}
+
+
+
 
 export default profileReducer;

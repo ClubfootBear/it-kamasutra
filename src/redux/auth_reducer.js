@@ -1,3 +1,6 @@
+import {usersApi} from "../componets/Api/api";
+import {followSuccess, setFetchingInProgress} from "./users_reducer";
+
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 
 let initialState =
@@ -28,5 +31,16 @@ export const setAuthData = (id, email, login) => ({
     authData: {id, email, login,}
 })
 
+
+export const getAuthData = () => {
+    return (dispatch) => {
+        usersApi.tookAuthData().then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login,} = data.data;
+                dispatch(setAuthData(id, email, login,));
+            }
+        });
+    }
+}
 
 export default authReducer;
