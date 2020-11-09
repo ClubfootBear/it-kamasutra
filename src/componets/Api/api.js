@@ -29,16 +29,34 @@ export const usersApi = {
     },
 
     tookAuthData() {
-        return instance.get(`auth/me`).then( response => {
-            return response.data;
-        });
+        return authApi.tookAuthData();
     },
 
     userProfile(userId) {
-        return instance.get(`profile/`+ userId).then( response => {
-            return response.data;
-        })
+        return profileApi.getProfile(userId);
     },
 
 }
 
+export const profileApi = {
+    getProfile(userId) {
+        return instance.get(`profile/`+ userId).then( response => {
+            return response.data;
+        })
+    },
+    getStatus(userId) {
+        debugger
+        return instance.get(`profile/status/`+ userId)
+        },
+    updateStatus(status) {
+        return instance.put(`profile/status/`, {status: status})
+        },
+}
+
+export const authApi = {
+    tookAuthData() {
+        return instance.get(`auth/me`).then( response => {
+            return response.data;
+        });
+    },
+}
