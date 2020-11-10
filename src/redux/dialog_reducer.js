@@ -16,23 +16,14 @@ let initialState =
             {id: 2, message: 'Hey!'},
             {id: 3, message: 'WTF>>??'},
         ],
-        newMessageBody: 'Viva la IT-Kamasutra!',
     }
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_MESSAGE_BODY:{
-            let stateCopy = {
-                ...state,
-                newMessageBody: action.textBody,
-            }
-            return stateCopy;
-        }
         case ADD_MESSAGE_BODY:{
-            let messageBody = state.newMessageBody;
+            let messageBody = action.newMessageBody;
             let stateCopy = {
                 ...state,
-                newMessageBody: '',
                 dialogMessages: [...state.dialogMessages, {id:13, message: messageBody}]
             }
             return stateCopy;
@@ -43,13 +34,9 @@ const dialogReducer = (state = initialState, action) => {
 }
 
 
-export const updateMessageBodyCreator = (text) => ({
-        type: UPDATE_MESSAGE_BODY,
-        textBody: text,
-    })
-
-export const addNewMessageCreator = () => ({
+export const addNewMessageCreator = (newMessageBody) => ({
     type: ADD_MESSAGE_BODY,
+    newMessageBody: newMessageBody
 })
 
 export default dialogReducer;
