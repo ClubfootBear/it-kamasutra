@@ -3,13 +3,25 @@ import s from './MyPosts.module.css';
 //Component import
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {TextArea} from "../../FormsControl/Formscontrol";
+
+
+const maxLength10 = maxLengthCreator(3)
+
 
 const MyPostsForm = (props) => {
+    // validate={[required, maxLength10]} value={props.newPostText} validate={[maxLength10]}
     return (
             <div>
                 <form onSubmit={props.handleSubmit}>
                     <div>
-                        <Field component={"textarea"} name={"newPostText"} value={props.newPostText} />
+                        <Field
+                            component={TextArea}
+                            name={"newPostText"}
+                            placeholder={'Post Message'}
+                            validate={[maxLength10, required]}
+                        />
                     </div>
                     <div>
                         <button>Add new Post</button>
@@ -37,7 +49,8 @@ const MyPosts = (props) => {
             </h3>
             <MyPostReduxForm
                 onSubmit={onAddNewPost}
-                newPostText={props.newPostText}/>
+                // newPostText={props.newPostText}
+            />
             <div>
                 <div className={s.posts}>
                     {messageItems}
