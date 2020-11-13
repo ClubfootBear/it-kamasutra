@@ -13,6 +13,7 @@ import UsersContainer from "./componets/Users/UsersContainer";
 import ProfileContainer from "./componets/Profile/ProfileContainer";
 import HeaderContainer from "./componets/Header/HeaderContainer";
 import Login from "./componets/Login/Login";
+import InputCheck from "./componets/InputCheck/InputCheck";
 
 
 function App(props) {
@@ -35,6 +36,9 @@ function App(props) {
                     }/>
                     <Route path={'/login'} render={() =>
                         <Login />
+                    }/>
+                    <Route path={'/input'} render={() =>
+                        <InputCheck />
                     }/>
                 </div>
             </div>
