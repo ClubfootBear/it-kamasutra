@@ -1,36 +1,28 @@
-import React from "react"
+import React, {useState} from "react"
 
-class InputCheck extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ""
-        }
+ const InputCheck = () => {
 
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    isNumber = (value) => {
+    const [value, setValue] = useState()
+    const isNumber = (value) => {
         let intVal = Number(value)
         let result = isNaN(intVal) ? false : true
         return result
 };
 
-    handleChange = (e) => {
+    const handleChange = (e) => {
         let inputValue = e.target.value;
-        this.isNumber(inputValue) ? this.setState({value: inputValue,}) : alert('Please type just a numbers )))')
+        isNumber(inputValue) ? setValue(inputValue) : alert('Please type just a numbers )))')
     }
 
 
-    render() {
+
         return(
             <form>
                 <p>Just a number</p>
-                <input onChange={this.handleChange} value={this.state.value}/>
+                <input onChange={handleChange} value={value}/>
             </form>
         )
-    }
+
 }
 
 export default InputCheck;
